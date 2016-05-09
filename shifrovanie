@@ -1,0 +1,55 @@
+program shifrovanie;
+var l:real;: string = ';: array['A' .. 'H','A' .. 'H'] of char = (
+('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'),
+('I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'),
+('Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X'),
+('Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f'),
+('g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'),
+('o', 'p', 'q', 'r', 's', 't', 'u', 'v'),
+('w', 'x', 'y', 'z', '1', '2', '3', '4'),
+('5', '6', '7', '8', '9', '_', '+', '-'));
+Atbash(toCode: string): string;
+i: integer;i := 1 to length(toCode) 
+do((toCode[i]>='a')and(toCode[i]<='z'))
+toCode[i]:=Chr(219-Ord(toCode[i]));
+((toCode[i]>='A') and (toCode[i]<='Z'))toCode[i]:=Chr(155-Ord(toCode[i])); s:=toCode;
+CaesarEncipher(toCode: string): string;
+i, T: integer; 
+i := 1 to length(toCode) do begin[ i ] := Chr((Ord(toCode[ i ]) + 3));
+s:= toCode;
+CaesarDecipher(toDecode: string): string;
+i, T: integer;i := 1 to length(toDecode) do begin[ i ] := Chr((Ord(toDecode[ i ]) - 3));
+s:= toDecode;
+PolibiusEncipher(toCode: string): string;: integer;, jx: char;: string;:= '';i := 1 to length(toCode) do beginix := 'A' to 'H' dojx := 'A' to 'H' doTPolibius[ix, jx] = toCode[ i ] then begin:= s + ix + jx; break;;;:= s;
+PolibiusDecipher(toDecode: string): string;: integer;: string;:= '';:= 1;i <= length(toDecode) do begin:= s + TPolibius[toDecode[ i ], toDecode[succ(i)]];(i, 2);;:= s;
+GronsfeldEncipher(toCode, K: string): string;
+i, T: integer;
+i := 1 to length(toCode) do begin[ i ] := Chr(Ord(toCode[ i ])+(Ord(K[(pred(i) mod length(K)) + 1]) - Ord('0')));
+s:= toCode;
+GronsfeldDecipher(toDecode, K: string): string;
+i, T: integer;
+i := 1 to length(toDecode) do begin[ i ] := Chr(Ord(toDecode[i])-(Ord(K[(pred(i) mod length(K)) + 1]) - Ord('0')));
+s:= toDecode;
+ViginerEncipher(toCode, K: string): string;
+: integer;: byte;: string;:= '';i := 1 to length(toCode) do begin:= pred(pos(K[ (pred(i) mod length(K)) + 1 ], TViginer));:= s+TViginer[ ((pred(pos(toCode[ i ], TViginer)) + currK) mod length(TViginer)) + 1 ];;:= s;;ViginerDecipher(toDecode, K: string): string;, T: integer;: byte;: string;:= '';i := 1 to length(toDecode) do begin:= pred(pos(K[ (pred(i) mod length(K)) + 1 ], TViginer));:= pred(pos(toDecode[ i ], TViginer)) - currK;T < 0 then inc(T, length(TViginer));:= s + TViginer[T + 1];;:= s;;: string;: string;: real;: real;
+writeln('Введите номер интересующего метода шифрования:1-Атбаш,2-Цезарь,3-Полибий,4-Гронсфельд,5-Виженер');(m);
+writeln('Введите слово');
+readln(word);('1-зашифровать/2-расшифровать ');
+readln(k);m=1 then begink=1 then begin:= Atbash(word);
+writeln('Шифрование элемента ',s);
+endbegin:= Atbash(word);
+writeln('Расшифровывание элемента ', s);
+end;;m=2 then begink=1 then begin:= CaesarEncipher(word);('Шифрование элемента ',s)
+endbegin:= CaesarDecipher(word);
+writeln('Расшифровывание элемента ',s);
+end;;m=3 then begink=1 then begin:= PolibiusEncipher(word);
+writeln('Шифрование элемента ',s)
+endbegin:= PolibiusDecipher(word);
+writeln('Расшифровывание элемента ',s);
+end;end;m=4 then begink=1 then begin:= GronsfeldEncipher(word, '2178');
+writeln('Шифрование элемента ',s)
+endbegin:= GronsfeldDecipher(word, '2178');('Расшифровывание элемента ',s);
+end;;m=5 then begink=1 then begin:= ViginerEncipher(word, 'BORED');('Шифрование элемента ',s)
+endbegin:= ViginerDecipher(word, 'BORED');
+writeln('Расшифровывание элемента ',s);;end;end.
+ 
